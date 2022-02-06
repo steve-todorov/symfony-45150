@@ -1,0 +1,57 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+#parameters: ~
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind: []
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '%kernel.project_dir%/src/*'
+        exclude:
+            - '%kernel.project_dir%/src/Form'
+            - '%kernel.project_dir%/src/Services'
+            - '%kernel.project_dir%/src/Kernel.php'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '%kernel.project_dir%/src/Controller'
+        tags: ['controller.service_arguments']
+
+    # makes classes in src/App/DataFixtures available to be used as services
+    # and have a tag that allows actions to type-hint services
+    App\DataFixtures\:
+        resource: '%kernel.project_dir%/src/DataFixtures'
+        tags: ['doctrine.fixture.orm']
+
+    App\Form\:
+        resource: '%kernel.project_dir%/src/Form/*'
+        autowire: true
+        autoconfigure: true
+
+    App\Services\:
+        resource: '%kernel.project_dir%/src/Services/*'
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    # ExpressionLanguage needs to be registered so it can be later used (i.e. @Entity)
+    # NOTE: Watch out for https://github.com/symfony/symfony/issues/21691
+    Symfony\Component\ExpressionLanguage\ExpressionLanguage:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    Symfony\Component\Security\Core\Security:
+        alias: 'security.helper'
+        public: true
+

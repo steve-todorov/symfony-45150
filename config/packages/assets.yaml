@@ -1,0 +1,3 @@
+framework:
+    assets:
+        json_manifest_path: '%env(resolve:ASSETS_PATH)%/dist/manifest.json'

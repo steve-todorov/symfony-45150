@@ -1,0 +1,20 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: '3.1'
+services:
+  php:
+    build: .docker/php-fpm
+    image: symfony-45150-php-fpm
+    working_dir: /application
+    volumes:
+      - '.:/application'
+      - './.docker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini'
+      - './.docker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/cli/conf.d/99-overrides.ini'
+      - $HOME/.ssh:/tmp/.ssh
+      - $SSH_AUTH_SOCK:/ssh-agent
+    environment:
+      - SSH_AUTH_SOCK=/ssh-agent
+    extra_hosts:
+      - "gateway.docker.internal:host-gateway"
+    command: [ "/bin/bash", "-c", "composer install --no-scripts && composer run-script auto-scripts && php bin/console server:run 0.0.0.0:8000" ]

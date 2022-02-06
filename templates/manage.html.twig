@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+        <button type="submit">Submit button</button>
+    {{ form_end(form) }}
+
+    <br/>
+    <br/>
+    <br/>
+
+    <input type="text" placeholder="amount" id="amount" value="1234.00"/>
+    <input type="text" placeholder="note" id="note" value="example note"/>
+    <button type="button" id="add">Add</button>
+
+    <script type="text/javascript">
+        let i = 0;
+        document.querySelector('#add').addEventListener('click', function(e) {
+
+            const amount = document.createElement('input');
+            amount.setAttribute('type', 'text');
+            amount.setAttribute('name', 'invoice_form[payments]['+i+'][amount]');
+            amount.setAttribute('value', document.getElementById('amount').value);
+
+            const note = document.createElement('input');
+            note.setAttribute('type', 'text');
+            note.setAttribute('name', 'invoice_form[payments]['+i+'][note]');
+            note.setAttribute('value', document.getElementById('note').value);
+
+            document.querySelector('fieldset').appendChild(amount);
+            document.querySelector('fieldset').appendChild(note);
+        });
+    </script>
+{% endblock %}

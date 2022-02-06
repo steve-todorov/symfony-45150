@@ -1,0 +1,55 @@
+{
+    "license": "proprietary",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "animate.css": "^3.7.2",
+        "blueimp-canvas-to-blob": "^3.16.0",
+        "blueimp-file-upload": "^9.34.0",
+        "blueimp-load-image": "^2.24.0",
+        "blueimp-tmpl": "^3.13.0",
+        "bootbox": "^4.4.0",
+        "bootstrap-datepicker": "^1.4.1",
+        "bootstrap-sass": "^3.3.7",
+        "bootstrap-touchspin": "^4.2.5",
+        "filesize": "^6.0.1",
+        "jquery": "2.1.4",
+        "jquery-ui": "^1.10.5",
+        "jquery-word-and-character-counter-plugin": "^2.5.1",
+        "jquery.numeric": "^1.0.0",
+        "moment": "^2.24.0",
+        "open-sans-fontface": "^1.4.0",
+        "roboto-fontface": "^0.10.0",
+        "select2": "^3.5.1",
+        "sticky-table-headers": "^0.1.24"
+    },
+    "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.11.2",
+        "@symfony/webpack-encore": "^0.28.0",
+        "@types/jquery": "^3.3.31",
+        "autoprefixer": "^9.4.10",
+        "compression-webpack-plugin": "^2.0.0",
+        "core-js": "^3.0.0",
+        "expose-loader": "^0.7.5",
+        "imports-loader": "^0.8.0",
+        "mini-css-extract-plugin": "^0.5.0",
+        "node-sass": "^4.11.0",
+        "postcss-loader": "^3.0.0",
+        "regenerator-runtime": "^0.13.2",
+        "sass-loader": "^7.0.1",
+        "script-loader": "^0.7.2",
+        "style-loader": "^0.23.1",
+        "ts-loader": "^5.4.5",
+        "typescript": "^3.6.4",
+        "webpack-notifier": "^1.6.0"
+    },
+    "browserslist": [
+        "> .5% or last 2 versions",
+        "not dead"
+    ]
+}

@@ -1,0 +1,7 @@
+imports:
+    - { resource: services.yml }
+
+framework:
+    test: true
+    session:
+        storage_id: session.storage.mock_file
