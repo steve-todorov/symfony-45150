@@ -37,21 +37,20 @@ class MyControllerTest extends WebTestCase
 
         $form = $crawler->filter('form')->form();
 
-        $paymentData = [];
-        $paymentData['invoice_form[client]'] = 123456;
-        $paymentData['invoice_form[transactionNumber]'] = "ABCD12346";
+        $values = $form->getPhpValues();
+
+        $values['invoice_form']['client'] = 123456;
+        $values['invoice_form']['transactionNumber'] = "ABCD12346";
 
         $i = 0;
         foreach ($invoices as $invoice) {
-            $paymentData["invoice_form[payments][$i][amount]"] = $invoice['amount'];
-            $paymentData["invoice_form[payments][$i][note]"] = $invoice['note'];
+            $values["invoice_form"]['payments'][$i]['amount'] = $invoice['amount'];
+            $values["invoice_form"]['payments'][$i]['note'] = $invoice['note'];
             $i++;
         }
 
-        $form->setValues($paymentData);
-
         // submit
-        $client = $client->submit($form);
+        $client->request($form->getMethod(), $form->getUri(), $values, $form->getPhpFiles());
 
         // assert post was successful and redirects to the respectful route.
         $this->assertTrue($client->getResponse()->isRedirect('/'));
